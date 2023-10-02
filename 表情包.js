@@ -6,7 +6,9 @@
 // @timestamp    1696155071
 // 2023-10-01 18:11:19
 // @license      MIT
-// @homepageURL  https://github.com/sealdice/javascript
+// @homepageURL  https://github.com/MX-fox/JS
+// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%A1%A8%E6%83%85%E5%8C%85.js
+// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%A1%A8%E6%83%85%E5%8C%85.js
 // ==/UserScript==
  
 // 首先检查是否已经存在
