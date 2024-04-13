@@ -22,7 +22,7 @@ if (!ext) {
 
 const cmdFANYI = seal.ext.newCmdItemInfo();
 cmdFANYI.name = '翻译'; // 指令名字，可用中文
-cmdFANYI.help = '自动识别内容并翻译，使用 .翻译/fy <内容> ';
+cmdFANYI.help = '自动识别内容并翻译\n指令： .翻译/fy <内容> ';
 cmdFANYI.solve = (ctx, msg, cmdArgs) => {
     let val = cmdArgs.rawArgs;
     switch (val) {
