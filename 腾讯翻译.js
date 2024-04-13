@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         fanyi
 // @author       暮星
-// @version      1.0.0
+// @version      1.0.1
 // @description  
 // @timestamp    1713010934
 // 2024-04-13 20:21:04
 // @license      MIT
 // @homepageURL  https://github.com/MX-fox/JS
+// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
+// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
 // ==/UserScript==
 
 // 首先检查是否已经存在
