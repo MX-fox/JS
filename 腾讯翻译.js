@@ -7,7 +7,7 @@
 // 2024-04-13 20:21:04
 // @license      MIT
 // @homepageURL  https://github.com/MX-fox/JS
-// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
+// @updateUrl    https://mirror.ghproxy.com//https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
 // @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
 // ==/UserScript==
 
