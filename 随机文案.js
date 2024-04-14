@@ -2,7 +2,7 @@
 // @name         随机文案
 // @author       暮星
 // @version      1.0.0
-// @description  使用 .随机文案 help 查看帮助
+// @description  使用 .随机文案 help 查看帮助（骚话内容尺度不确定，请自行决定是否开启）
 // @timestamp    1713084220
 // 2024-04-14 16:43:40
 // @license      MIT
@@ -22,49 +22,49 @@ if (!ext) {
 
 const cmdRand = seal.ext.newCmdItemInfo();
 cmdRand.name = '一言'; // 指令名字，可用中文
-cmdRand.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdRand.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdRand.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/ian/rand");
 };
 
 const cmddongman = seal.ext.newCmdItemInfo();
 cmddongman.name = '动漫'; // 指令名字，可用中文
-cmddongman.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmddongman.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmddongman.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/ian/dongman");
 };
 
 const cmdwenxue = seal.ext.newCmdItemInfo();
 cmdwenxue.name = '文学'; // 指令名字，可用中文
-cmdwenxue.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdwenxue.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdwenxue.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/ian/wenxue");
 };
 
 const cmdshici = seal.ext.newCmdItemInfo();
 cmdshici.name = '诗词'; // 指令名字，可用中文
-cmdshici.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdshici.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdshici.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/ian/shici");
 };
 
 const cmdsexy = seal.ext.newCmdItemInfo();
 cmdsexy.name = '骚话'; // 指令名字，可用中文
-cmdsexy.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdsexy.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdsexy.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/text/sexy");
 };
 
 const cmdlove = seal.ext.newCmdItemInfo();
 cmdlove.name = '情话'; // 指令名字，可用中文
-cmdlove.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdlove.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdlove.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/text/love");
 };
 
 const cmdjoke = seal.ext.newCmdItemInfo();
 cmdjoke.name = '笑话'; // 指令名字，可用中文
-cmdjoke.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.骚话\n.情话\n.笑话';
+cmdjoke.help = '指令：\n.一言\n.文学\n.动漫\n.诗词\n.情话\n.笑话\n.骚话';
 cmdjoke.solve = (ctx, msg, cmdArgs) => {
     return solve(ctx, msg, cmdArgs, "https://api.vvhan.com/api/text/joke");
 };
