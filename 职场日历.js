@@ -7,8 +7,8 @@
 // 2024-04-14 16:02:35
 // @license      MIT
 // @homepageURL  https://github.com/sealdice/javascript
-// @updateUrl    https://mirror.ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
-// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%85%BE%E8%AE%AF%E7%BF%BB%E8%AF%91.js
+// @updateUrl    https://mirror.ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%81%8C%E5%9C%BA%E6%97%A5%E5%8E%86.js
+// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%81%8C%E5%9C%BA%E6%97%A5%E5%8E%86.js
 // ==/UserScript==
 
 // 首先检查是否已经存在
