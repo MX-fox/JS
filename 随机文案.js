@@ -7,8 +7,8 @@
 // 2024-04-14 16:43:40
 // @license      MIT
 // @homepageURL  https://github.com/MX-fox/JS
-// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%A1%A8%E6%83%85%E5%8C%85.js
-// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%A1%A8%E6%83%85%E5%8C%85.js
+// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E9%9A%8F%E6%9C%BA%E6%96%87%E6%A1%88.js
+// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E9%9A%8F%E6%9C%BA%E6%96%87%E6%A1%88.js
 // ==/UserScript==
 
 // 首先检查是否已经存在
