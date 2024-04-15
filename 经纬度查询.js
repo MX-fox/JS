@@ -14,7 +14,7 @@
 // 首先检查是否已经存在
 let ext = seal.ext.find('geocoder');
 if (!ext) {
-    // 不存在，那么建立扩展，名为，作者“”，版本1.0.0
+    // 不存在，那么建立扩展，名为，作者“”，版本 1.0.0
     ext = seal.ext.new('geocoder', '暮星', '1.0.0');
     // 注册扩展
     seal.ext.register(ext);
@@ -22,7 +22,7 @@ if (!ext) {
 
 const cmdgeocoder = seal.ext.newCmdItemInfo();
 cmdgeocoder.name = '经纬'; // 指令名字，可用中文
-cmdgeocoder.help = '查询经纬线详细信息\n指令： .经纬/jw <经度> <维度>\n经度最大为180，纬度最大为90\n东西经度和南北维度通过正负值区分 ';
+cmdgeocoder.help = '查询经纬线详细信息\n指令： .经纬/jw <经度> <维度>\n经度最大为 180，纬度最大为 90\n东西经度和南北维度通过正负值区分 ';
 cmdgeocoder.solve = (ctx, msg, cmdArgs) => {
     let lng = cmdArgs.getArgN(1);
     let lat = cmdArgs.getArgN(2);
@@ -52,7 +52,7 @@ cmdgeocoder.solve = (ctx, msg, cmdArgs) => {
             if (response.ok) {
               return response.text();
             } else {
-              seal.replyToSender(ctx, msg, `api已失效`);
+              seal.replyToSender(ctx, msg, `api 已失效`);
               return seal.ext.newCmdExecuteResult(false);
             }
           })

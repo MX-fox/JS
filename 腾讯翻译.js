@@ -14,7 +14,7 @@
 // 首先检查是否已经存在
 let ext = seal.ext.find('fanyi');
 if (!ext) {
-    // 不存在，那么建立扩展，名为，作者“”，版本1.0.0
+    // 不存在，那么建立扩展，名为，作者“”，版本 1.0.0
     ext = seal.ext.new('fanyi', '暮星', '1.0.0');
     // 注册扩展
     seal.ext.register(ext);
@@ -42,7 +42,7 @@ cmdFANYI.solve = (ctx, msg, cmdArgs) => {
               return response.text();
             } else {
               console.log(response.status);
-              console.log("api失效！");
+              console.log("api 失效！");
             }
           })
           .then((data) => {

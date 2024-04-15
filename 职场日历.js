@@ -14,7 +14,7 @@
 // 首先检查是否已经存在
 let ext = seal.ext.find('zhichang');
 if (!ext) {
-    // 不存在，那么建立扩展，名为，作者“”，版本1.0.0
+    // 不存在，那么建立扩展，名为，作者“”，版本 1.0.0
     ext = seal.ext.new('zhichang', '暮星', '1.0.0');
     // 注册扩展
     seal.ext.register(ext);
@@ -31,13 +31,13 @@ ext.onNotCommandReceived = (ctx, msg) => {
               return response.text();
             } else {
               console.log(response.status);
-              console.log("api失效！");
+              console.log("api 失效！");
             }
           })
           .then((data) => {
-            //返回数据转换为json对象以可以访问
+            //返回数据转换为 json 对象以可以访问
             let imgJson = JSON.parse(data);
-            // 使用[""]方式访问json对象中的tp项 
+            // 使用 [""] 方式访问 json 对象中的 tp 项 
             let imgUrl = imgJson["url"];
             // 拼装返回的图片消息
             let messageRet = "[CQ:image,file="+imgUrl+"]";
@@ -45,7 +45,7 @@ ext.onNotCommandReceived = (ctx, msg) => {
             seal.replyToSender(ctx, msg, messageRet);
           })
           .catch((error) => {
-            console.log("api请求错误！错误原因：" + error);
+            console.log("api 请求错误！错误原因：" + error);
           });
         return seal.ext.newCmdExecuteResult(true);
     }
