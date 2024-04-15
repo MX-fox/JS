@@ -6,6 +6,8 @@
 // @timestamp    1713189812
 // 2024-04-15 22:03:32
 // @license      MIT
+// @updateUrl    https://mirror.ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/main/%E8%97%8F%E5%A4%B4%E8%AF%97.js
+// @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/main/%E8%97%8F%E5%A4%B4%E8%AF%97.js
 // @homepageURL  https://github.com/MX/JS
 // ==/UserScript==
 
