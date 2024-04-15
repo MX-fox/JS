@@ -95,6 +95,7 @@ function solve(ctx, msg, cmdArgs, url) {
     }
 }
 // 将命令注册到扩展中
+ext.cmdMap['随机文案'] = cmdRand;
 ext.cmdMap['一言'] = cmdRand;
 ext.cmdMap['动漫'] = cmddongman;   
 ext.cmdMap['文学'] = cmdwenxue;   
