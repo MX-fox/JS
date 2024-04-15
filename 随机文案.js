@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         随机文案
 // @author       暮星
-// @version      1.0.0
+// @version      1.0.1
 // @description  使用 .随机文案 help 查看帮助（骚话内容尺度不确定，请自行决定是否开启）
 // @timestamp    1713084220
 // 2024-04-14 16:43:40
