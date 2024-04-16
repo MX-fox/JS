@@ -15,7 +15,7 @@
 let ext = seal.ext.find('Rand');
 if (!ext) {
     // 不存在，那么建立扩展，名为 Rand，作者“”，版本 1.0.0
-    ext = seal.ext.new('Rand', '暮星', '1.0.0');
+    ext = seal.ext.new('Rand', '暮星', '1.0.1');
     // 注册扩展
     seal.ext.register(ext);
 }

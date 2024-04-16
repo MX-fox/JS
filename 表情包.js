@@ -15,7 +15,7 @@
 let ext = seal.ext.find('sticker');
 if (!ext) {
     // 不存在，那么建立扩展，名为，作者“”，版本 1.0.0
-    ext = seal.ext.new('sticker', '暮星', '1.0.0');
+    ext = seal.ext.new('sticker', '暮星', '1.0.2');
     // 注册扩展
     seal.ext.register(ext);
 }
