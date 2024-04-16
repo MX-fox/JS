@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         fanyi
+// @name         腾讯翻译
 // @author       暮星
 // @version      1.0.1
 // @description  使用 .fy help 查看帮助

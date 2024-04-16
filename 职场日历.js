@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         zhichang
+// @name         职场日历
 // @author       暮星
 // @version      1.0.0
 // @description  职场日历，输入 职场日历 获得图片回复
@@ -31,7 +31,7 @@ ext.onNotCommandReceived = (ctx, msg) => {
               return response.text();
             } else {
               console.log(response.status);
-              console.log("api 失效！");
+              seal.replyToSender(ctx, msg, "api 失效！");
             }
           })
           .then((data) => {

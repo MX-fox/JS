@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         geocoder
+// @name         经纬度查询
 // @author       暮星
 // @version      1.0.0
 // @description  使用 .jw help 查看帮助
