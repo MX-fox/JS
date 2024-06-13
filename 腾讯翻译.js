@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         腾讯翻译
 // @author       暮星
-// @version      1.0.1
+// @version      1.0.2
 // @description  使用 .fy help 查看帮助
 // @timestamp    1713010934
 // 2024-04-13 20:21:04
@@ -15,7 +15,7 @@
 let ext = seal.ext.find('fanyi');
 if (!ext) {
     // 不存在，那么建立扩展，名为，作者“”，版本 1.0.0
-    ext = seal.ext.new('fanyi', '暮星', '1.0.1');
+    ext = seal.ext.new('fanyi', '暮星', '1.0.2');
     // 注册扩展
     seal.ext.register(ext);
 }
@@ -33,7 +33,7 @@ cmdFANYI.solve = (ctx, msg, cmdArgs) => {
       }
       default: {
         if (!val) val = 'Who are you?';
-        let url = `https://api.oioweb.cn/api/txt/QQFanyi?sourceText=${val}`;
+        let url = `https://xiaoapi.cn/API/fy.php?msg=${val}`;
         // 发送 GET 请求
         fetch(url)
           .then((response) => {
@@ -46,9 +46,7 @@ cmdFANYI.solve = (ctx, msg, cmdArgs) => {
             }
           })
           .then((data) => {
-            let resultJson = JSON.parse(data);
-            let fanyiJson = resultJson["result"];
-            let fanyianswer = fanyiJson["targetText"];
+            let fanyianswer = data.toString();
             seal.replyToSender(ctx, msg, fanyianswer);
           });
         return seal.ext.newCmdExecuteResult(true);
