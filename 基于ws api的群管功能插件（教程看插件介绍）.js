@@ -483,7 +483,7 @@ if (!seal.ext.find("GroupManagement")) {
           let userQQ;
           let mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
           userQQ = mctx.player.userId.split(":")[1];
-          if (ctx.privilegeLevel < 45 && mctx.userId !== ctx.userId) {
+          if (ctx.privilegeLevel < 45 && mctx.player.userId !== ctx.player.userId) {
             seal.replyToSender(ctx, msg, `权限不足，无法修改他人群头衔。`);
             return seal.ext.newCmdExecuteResult(true);
           }
