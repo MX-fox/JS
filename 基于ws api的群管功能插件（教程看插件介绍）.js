@@ -444,13 +444,13 @@ if (!seal.ext.find("GroupManagement")) {
     const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
     if (fmtCondition === 1) {
       let val = cmdArgs.getArgN(1);
+      ctx.delegateText = "";
       // 获取用户ID
       let userQQ;
       if (ctx.privilegeLevel < 45) {
         userQQ = ctx.player.userId.split(":")[1];
       } else {
         let mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
-        ctx.delegateText = "";
         userQQ = mctx.player.userId.split(":")[1];
       }
 
