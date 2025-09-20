@@ -115,14 +115,6 @@ if (!seal.ext.find("GroupManagement")) {
                 }
               }
             }
-          } else {
-            seal.replyToSender(
-              ctx,
-              msg,
-              `当前不满足使用条件，无法使用群管功能`
-            );
-            return seal.ext.newCmdExecuteResult(true);
-          }
         }
 
           const postData = {
