@@ -445,14 +445,6 @@ if (!seal.ext.find("GroupManagement")) {
     if (fmtCondition === 1) {
       let val = cmdArgs.getArgN(1);
       ctx.delegateText = "";
-      // 获取用户ID
-      let userQQ;
-      if (ctx.privilegeLevel < 45) {
-        userQQ = ctx.player.userId.split(":")[1];
-      } else {
-        let mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
-        userQQ = mctx.player.userId.split(":")[1];
-      }
 
       switch (val) {
         case "help": {
@@ -484,6 +476,15 @@ if (!seal.ext.find("GroupManagement")) {
               msg,
               `权限不足，无法修改群头衔,当前只有管理员与群主可无法修改群头衔`
             );
+            return seal.ext.newCmdExecuteResult(true);
+          }
+
+          // 获取用户ID
+          let userQQ;
+          let mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
+          userQQ = mctx.player.userId.split(":")[1];
+          if (ctx.privilegeLevel < 45 && mctx.userId !== ctx.userId) {
+            seal.replyToSender(ctx, msg, `权限不足，无法修改他人群头衔。`);
             return seal.ext.newCmdExecuteResult(true);
           }
 
