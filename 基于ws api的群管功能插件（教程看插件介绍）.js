@@ -115,7 +115,7 @@ if (!seal.ext.find("GroupManagement")) {
                 }
               }
             }
-        }
+          }
 
           const postData = {
             "action": "set_group_ban",
@@ -141,8 +141,16 @@ if (!seal.ext.find("GroupManagement")) {
             }
           };
           return seal.ext.newCmdExecuteResult(true);
-      }
-    };
+        }
+      };
+    } else {
+      seal.replyToSender(
+        ctx,
+        msg,
+        `当前不满足使用条件，无法使用群管功能`
+      );
+      return seal.ext.newCmdExecuteResult(true);
+    }
   }
   const cmdgroupname = seal.ext.newCmdItemInfo();
   cmdgroupname.name = "设置群名";
@@ -392,35 +400,35 @@ if (!seal.ext.find("GroupManagement")) {
 
   cmdlike.solve = (ctx, msg, cmdArgs) => {
     const ws = new WebSocket(seal.ext.getStringConfig(ext, "ws地址"));
-    
-      const mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
-      ctx.delegateText = "";
-      const userId = mctx.player.userId.split(":")[1];
-      const username = mctx.player.name;
 
-      const postData = {
-        "action": "send_like",
-        "params": {
-          user_id: userId,
-          times: 10,
-        }
-      };
-      ws.onopen = function () {
-        ws.send(JSON.stringify(postData));
-        console.log(ws.readyState);
-        seal.replyToSender(ctx, msg, `已为${username}点赞`);
-        setTimeout(() => {
-          ws.close(1000, '点赞成功');
-        }, 3000);
-      };
+    const mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
+    ctx.delegateText = "";
+    const userId = mctx.player.userId.split(":")[1];
+    const username = mctx.player.name;
 
-      ws.onerror = function (event) {
-        if (event.error) {
-          seal.replyToSender(ctx, msg, `赞操作失败，请查看日志。`);
-          console.error('WebSocket错误:', event.error);
-        }
-      };
-      return seal.ext.newCmdExecuteResult(true);
+    const postData = {
+      "action": "send_like",
+      "params": {
+        user_id: userId,
+        times: 10,
+      }
+    };
+    ws.onopen = function () {
+      ws.send(JSON.stringify(postData));
+      console.log(ws.readyState);
+      seal.replyToSender(ctx, msg, `已为${username}点赞`);
+      setTimeout(() => {
+        ws.close(1000, '点赞成功');
+      }, 3000);
+    };
+
+    ws.onerror = function (event) {
+      if (event.error) {
+        seal.replyToSender(ctx, msg, `赞操作失败，请查看日志。`);
+        console.error('WebSocket错误:', event.error);
+      }
+    };
+    return seal.ext.newCmdExecuteResult(true);
   };
 
 
