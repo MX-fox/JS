@@ -5,8 +5,9 @@
 // @description  群管理和名片点赞这些onebot部分功能实现。是在星尘佬群公告插件的基础上改的，将星辰佬原有的群公告发布部分也合并加入了。\n重载插件后在插件设置修改端口为正向ws端口，内置客户端请看账号设置页面。\n使用.群管帮助查看所有命令。\n此版本有bug请联系暮星（QQ:1009592348)。
 // @timestamp    1758303681  
 // @license      MIT
+// @updateUrl    https://ghproxy.com/https://raw.githubusercontent.com/MX-fox/JS/refs/heads/main/%E5%9F%BA%E4%BA%8Ews%20api%E7%9A%84%E7%BE%A4%E7%AE%A1%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6%EF%BC%88%E6%95%99%E7%A8%8B%E7%9C%8B%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%89.js
 // @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/refs/heads/main/%E5%9F%BA%E4%BA%8Ews%20api%E7%9A%84%E7%BE%A4%E7%AE%A1%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6%EF%BC%88%E6%95%99%E7%A8%8B%E7%9C%8B%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%89.js
-// @homepageURL  https://github.com/baiyu-yu/plug-in
+// @homepageURL  https://github.com/MX-fox/JS
 // ==/UserScript==
 
 if (!seal.ext.find("GroupManagement")) {
