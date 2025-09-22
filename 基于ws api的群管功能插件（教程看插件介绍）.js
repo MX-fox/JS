@@ -580,7 +580,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
           }
 
-          let groupContent = msg.message.substring(7);
+          let groupContent = msg.message.split('群公告发布')[1];
           let groupQQ = ctx.group.groupId;
           let regex = /\[CQ:image,file=(.*?),url=(.*?)\]/;
           let imgMatch = groupContent.match(regex);
