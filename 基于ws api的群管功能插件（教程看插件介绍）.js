@@ -15,11 +15,22 @@ if (!seal.ext.find("GroupManagement")) {
     // 注册扩展
     seal.ext.register(ext);
     seal.ext.registerStringConfig(ext, "ws地址", "ws://127.0.0.1:8081");
+    seal.ext.registerStringConfig(ext, "ws Access token", ""，
+        "输入与上方端口对应的token，没有则留空");
     seal.ext.registerStringConfig(ext, "群管插件使用需要满足的条件", '1', "使用豹语表达式，例如：$t群号_RAW=='2001'，1为所有群可用");
     let whiteList = 0;
 
     function ws(postData, ctx, msg, successreply) {
-        const ws = new WebSocket(seal.ext.getStringConfig(ext, "ws地址"));
+        const wsUrl = seal.ext.getStringConfig(ext, "ws地址");
+        const token = seal.ext.getStringConfig(ext, "ws Access token");
+        let connectionUrl = wsUrl;
+
+        if (token) {
+            connectionUrl += (wsUrl.includes('?') ? '&' : '?') + `access_token=${encodeURIComponent(token)}`;
+        }
+
+        const ws = new WebSocket(connectionUrl);
+
         ws.onopen = function() {
             ws.send(JSON.stringify(postData));
             console.log(ws.readyState);
@@ -28,12 +39,14 @@ if (!seal.ext.find("GroupManagement")) {
                 ws.close(1000, `操作成功`);
             }, 3000);
         };
+
         ws.onerror = function(event) {
             if (event.error) {
                 seal.replyToSender(ctx, msg, `操作失败，请查看日志。`);
                 console.error('WebSocket错误:', event.error);
             }
         };
+
         return seal.ext.newCmdExecuteResult(true);
     }
 
@@ -55,6 +68,7 @@ if (!seal.ext.find("GroupManagement")) {
         seal.replyToSender(ctx, msg, helpText);
         return seal.ext.newCmdExecuteResult(true);
     };
+
     const cmdgroupban = seal.ext.newCmdItemInfo();
     cmdgroupban.name = "禁言";
     cmdgroupban.help =
@@ -64,6 +78,7 @@ if (!seal.ext.find("GroupManagement")) {
         const timeStr = cmdArgs.getArgN(1);
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             switch (timeStr) {
                 case "help": {
@@ -85,6 +100,7 @@ if (!seal.ext.find("GroupManagement")) {
                         );
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     const groupQQ = ctx.group.groupId;
                     const mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
                     ctx.delegateText = "";
@@ -92,6 +108,7 @@ if (!seal.ext.find("GroupManagement")) {
                     const username = mctx.player.name;
                     // 处理时长，默认为30分钟，支持直接输入秒数或友好格式（如"1h"、"30m"）
                     let duration = 30 * 60;
+
                     if (timeStr) {
                         const match = timeStr.match(/^(\d+)([smh])$/i);
                         if (match) {
@@ -130,6 +147,7 @@ if (!seal.ext.find("GroupManagement")) {
                             }
                         }
                     }
+
                     const postData = {
                         "action": "set_group_ban",
                         "params": {
@@ -139,6 +157,7 @@ if (!seal.ext.find("GroupManagement")) {
                         }
                     };
                     const successreply = `已禁言用户${username}，时长${duration}秒。`;
+
                     return ws(postData, ctx, msg, successreply)
                 }
             };
@@ -151,6 +170,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     }
+
     const cmdgroupname = seal.ext.newCmdItemInfo();
     cmdgroupname.name = "设置群名";
     cmdgroupname.help = "设置群名，.设置群名 【群名】";
@@ -158,6 +178,7 @@ if (!seal.ext.find("GroupManagement")) {
         const agroupname = cmdArgs.getArgN(1);
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             switch (agroupname) {
                 case "help": {
@@ -178,6 +199,7 @@ if (!seal.ext.find("GroupManagement")) {
                         );
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     const groupQQ = ctx.group.groupId;
                     const postData = {
                         "action": "set_group_name",
@@ -187,6 +209,7 @@ if (!seal.ext.find("GroupManagement")) {
                         }
                     };
                     const successreply = `已修改群名为${agroupname}。`;
+
                     return ws(postData, ctx, msg, successreply)
                 }
             }
@@ -199,6 +222,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     const cmdgroupadmin = seal.ext.newCmdItemInfo();
     cmdgroupadmin.name = "设置管理员";
     cmdgroupadmin.help =
@@ -208,6 +232,7 @@ if (!seal.ext.find("GroupManagement")) {
         const setAdmin = cmdArgs.getArgN(1);
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             if (!setAdmin) {
                 seal.replyToSender(ctx, msg, `请输入操作（1为设置，0为取消）`);
@@ -217,6 +242,7 @@ if (!seal.ext.find("GroupManagement")) {
                 seal.replyToSender(ctx, msg, seal.formatTmpl(ctx, "核心:提示_无权限"));
                 return seal.ext.newCmdExecuteResult(true);
             }
+
             const groupQQ = ctx.group.groupId;
             const mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
             ctx.delegateText = "";
@@ -231,6 +257,7 @@ if (!seal.ext.find("GroupManagement")) {
                 }
             };
             const successreply = `已${enable ? "设置" : "取消"}管理员权限。`;
+
             return ws(postData, ctx, msg, successreply)
         } else {
             seal.replyToSender(
@@ -241,6 +268,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     const cmdgroupallban = seal.ext.newCmdItemInfo();
     cmdgroupallban.name = "全员禁言";
     cmdgroupallban.help = "全员禁言，.全员禁言 1/0 (1为禁言，0为取消)";
@@ -248,6 +276,7 @@ if (!seal.ext.find("GroupManagement")) {
         const setAllBan = cmdArgs.getArgN(1);
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             if (!setAllBan) {
                 seal.replyToSender(ctx, msg, `请输入操作（1为禁言，0为取消）`);
@@ -257,9 +286,9 @@ if (!seal.ext.find("GroupManagement")) {
                 seal.replyToSender(ctx, msg, seal.formatTmpl(ctx, "核心:提示_无权限"));
                 return seal.ext.newCmdExecuteResult(true);
             }
+
             const groupQQ = ctx.group.groupId;
             const enable = parseInt(setAllBan, 10) === 1;
-
             const postData = {
                 "action": "set_group_whole_ban",
                 "params": {
@@ -268,6 +297,7 @@ if (!seal.ext.find("GroupManagement")) {
                 }
             };
             const successreply = `已${enable ? "开启" : "取消"}全员禁言。`;
+
             return ws(postData, ctx, msg, successreply)
         } else {
             seal.replyToSender(
@@ -278,6 +308,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     const cmdgroupkick = seal.ext.newCmdItemInfo();
     cmdgroupkick.name = "踢出";
     cmdgroupkick.help = "踢人，.踢出 @某人";
@@ -285,6 +316,7 @@ if (!seal.ext.find("GroupManagement")) {
     cmdgroupkick.solve = (ctx, msg, cmdArgs) => {
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             if (ctx.privilegeLevel < 50) {
                 seal.replyToSender(ctx, msg, seal.formatTmpl(ctx, "核心:提示_无权限"));
@@ -295,10 +327,10 @@ if (!seal.ext.find("GroupManagement")) {
                 seal.replyToSender(ctx, msg, `请指定需要踢出的用户。`);
                 return seal.ext.newCmdExecuteResult(true);
             }
+
             ctx.delegateText = "";
             const userId = mctx.player.userId.split(":")[1];
             const groupQQ = ctx.group.groupId;
-
             const postData = {
                 "action": "set_group_kick",
                 "params": {
@@ -308,6 +340,7 @@ if (!seal.ext.find("GroupManagement")) {
                 }
             };
             const successreply = `已踢出用户${userId}。`;
+
             return ws(postData, ctx, msg, successreply)
         } else {
             seal.replyToSender(
@@ -318,6 +351,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     const cmdlike = seal.ext.newCmdItemInfo();
     cmdlike.name = "点赞";
     cmdlike.help = "赞名片，.点赞 @某人";
@@ -335,8 +369,10 @@ if (!seal.ext.find("GroupManagement")) {
             }
         };
         const successreply = `已为${username}点赞。`;
+
         return ws(postData, ctx, msg, successreply)
     };
+
     const cmdSpecialTitle = seal.ext.newCmdItemInfo();
     cmdSpecialTitle.name = "群头衔更改";
     cmdSpecialTitle.help =
@@ -345,20 +381,21 @@ if (!seal.ext.find("GroupManagement")) {
     cmdSpecialTitle.solve = (ctx, msg, cmdArgs) => {
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             let val = cmdArgs.getArgN(1);
             ctx.delegateText = "";
             switch (val) {
                 case "help": {
-                    const ret = seal.ext.newCmdExecuteResult(true);
                     ret.showHelp = true;
-                    return ret;
+                    return seal.ext.newCmdExecuteResult(true);
                 }
                 default: {
                     if (!val) {
                         seal.replyToSender(ctx, msg, `请输入头衔内容`);
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     // 权限切换
                     if (val === "权限切换" && ctx.privilegeLevel > 45) {
                         whiteList = whiteList === 1 ? 0 : 1;
@@ -371,6 +408,7 @@ if (!seal.ext.find("GroupManagement")) {
                         );
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     if (ctx.privilegeLevel < 45 && whiteList === 1) {
                         seal.replyToSender(
                             ctx,
@@ -379,14 +417,17 @@ if (!seal.ext.find("GroupManagement")) {
                         );
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     // 获取用户ID
                     let userQQ;
                     let mctx = seal.getCtxProxyFirst(ctx, cmdArgs);
                     userQQ = mctx.player.userId.split(":")[1];
+
                     if (ctx.privilegeLevel < 45 && mctx.player.userId !== ctx.player.userId) {
                         seal.replyToSender(ctx, msg, `权限不足，无法修改他人群头衔。`);
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     const groupContent = val;
                     const contentLength = Array.from(groupContent).reduce(
                         (length, char) => {
@@ -399,10 +440,12 @@ if (!seal.ext.find("GroupManagement")) {
                         },
                         0
                     );
+
                     if (contentLength > 6) {
                         seal.replyToSender(ctx, msg, "头衔长度不能超过六个字符。");
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     let groupQQ = ctx.group.groupId.match(/:(\d+)/)[1];
                     let postData = {
                         "action": "set_group_special_title",
@@ -413,6 +456,7 @@ if (!seal.ext.find("GroupManagement")) {
                         }
                     };
                     const successreply = `群头衔更改成功。`;
+
                     return ws(postData, ctx, msg, successreply)
                 };
             }
@@ -425,6 +469,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     const cmdGroupNotice = seal.ext.newCmdItemInfo();
     cmdGroupNotice.name = "群公告发布";
     cmdGroupNotice.help =
@@ -432,6 +477,7 @@ if (!seal.ext.find("GroupManagement")) {
     cmdGroupNotice.solve = (ctx, msg, cmdArgs) => {
         const triggerCondition = seal.ext.getStringConfig(ext, "群管插件使用需要满足的条件");
         const fmtCondition = parseInt(seal.format(ctx, `{${triggerCondition}}`));
+
         if (fmtCondition === 1) {
             let val = cmdArgs.getArgN(1);
             switch (val) {
@@ -445,6 +491,7 @@ if (!seal.ext.find("GroupManagement")) {
                         seal.replyToSender(ctx, msg, `没有输入任何信息`);
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     if (val == "权限切换" && ctx.privilegeLevel > 45) {
                         whiteList = whiteList === 1 ? 0 : 1;
                         seal.replyToSender(ctx, msg, whiteList === 1 ? `权限已切换为管理员与群主可更改` : `权限已切换为所有人可更改`);
@@ -459,6 +506,7 @@ if (!seal.ext.find("GroupManagement")) {
                         );
                         return seal.ext.newCmdExecuteResult(true);
                     }
+
                     let groupContent = msg.message.split('群公告发布')[1];
                     let groupQQ = ctx.group.groupId;
                     let regex = /\[CQ:image,file=(.*?),url=(.*?)\]/;
@@ -471,11 +519,14 @@ if (!seal.ext.find("GroupManagement")) {
                             content: groupContentClean,
                         }
                     };
+
                     if (imgMatch !== null) {
                         let imgUrl = imgMatch[2];
                         postData.params.image = imgUrl;
                     }
+
                     const successreply = `群公告发送成功。`;
+
                     return ws(postData, ctx, msg, successreply)
                 };
             };
@@ -488,6 +539,7 @@ if (!seal.ext.find("GroupManagement")) {
             return seal.ext.newCmdExecuteResult(true);
         }
     };
+
     ext.cmdMap["禁言"] = cmdgroupban;
     ext.cmdMap["设置群名"] = cmdgroupname;
     ext.cmdMap[cmdgroupadmin.name] = cmdgroupadmin;
