@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         群管理和名片点赞ws版
 // @author       白鱼、星辰、暮星
-// @version      1.1.5
+// @version      1.1.6
 // @description  群管理和名片点赞这些onebot部分功能实现。是在星尘佬群公告插件的基础上改的，将星辰佬原有的群公告发布部分也合并加入了。\n重载插件后在插件设置修改端口为正向ws端口，内置客户端请看账号设置页面。\n使用.群管帮助查看所有命令。\n此版本有bug请联系暮星（QQ:1009592348)，使用前请确保海豹为2025年8月19日之后版本。
-// @timestamp    1758303681  
+// @timestamp    1758676303
 // @license      MIT
 // @updateUrl    https://ghfast.top/https://raw.githubusercontent.com/MX-fox/JS/refs/heads/main/%E5%9F%BA%E4%BA%8Ews%20api%E7%9A%84%E7%BE%A4%E7%AE%A1%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6%EF%BC%88%E6%95%99%E7%A8%8B%E7%9C%8B%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%89.js
 // @updateUrl    https://raw.githubusercontent.com/MX-fox/JS/refs/heads/main/%E5%9F%BA%E4%BA%8Ews%20api%E7%9A%84%E7%BE%A4%E7%AE%A1%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6%EF%BC%88%E6%95%99%E7%A8%8B%E7%9C%8B%E6%8F%92%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%89.js
@@ -11,12 +11,11 @@
 // ==/UserScript==
 
 if (!seal.ext.find("GroupManagement")) {
-    const ext = seal.ext.new("GroupManagement", "白鱼", "1.0.0");
+    const ext = seal.ext.new("GroupManagement", "白鱼", "1.1.6");
     // 注册扩展
     seal.ext.register(ext);
     seal.ext.registerStringConfig(ext, "ws地址", "ws://127.0.0.1:8081");
-    seal.ext.registerStringConfig(ext, "ws Access token", ""，
-        "输入与上方端口对应的token，没有则留空");
+    seal.ext.registerStringConfig(ext, "ws Access token", '', "输入与上方端口对应的token，没有则留空");
     seal.ext.registerStringConfig(ext, "群管插件使用需要满足的条件", '1', "使用豹语表达式，例如：$t群号_RAW=='2001'，1为所有群可用");
     let whiteList = 0;
 
